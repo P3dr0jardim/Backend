@@ -10,9 +10,9 @@ var connection = mysql.createConnection({
 
 exports.author_detail=function(req,res,next){
     var userId=req.params.id;
-    var query='SELECT * FROM users where id = ?';
+    var query='select * from users where id = ?';
     connection.query(query,userId,function(err,result,fields){
         if(err) throw err;
-        res.render('person', {title:'Person Detail', users: result[0]});
+        res.render('person', {title:'Person Detail', person: result[0]});
     });
 };

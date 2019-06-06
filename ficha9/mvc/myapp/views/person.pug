@@ -1,13 +1,7 @@
-{
-    "person1": {
-        "firstname": "pedro",
-        "lastname": "fernandes",
-        "profession": "nurse"
-    },
-    "person2": {
-        "firstname": "pedro",
-        "lastname": "fernandes",
-        "profession": "nurse",
-        "id": "1"
-    }
-}
+extends layout
+
+block content
+    h1= title
+    p  #{person.id}
+    p  #{person.password}
+    p  #{person.email}

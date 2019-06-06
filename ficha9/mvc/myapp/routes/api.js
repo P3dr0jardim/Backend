@@ -2,8 +2,6 @@ const express = require('express');
 var router= express.Router();
 
 const app = express();
-
-const fs = require('fs');
 const bodyParser = require("body-parser");
 
 app.use(bodyParser.json());
