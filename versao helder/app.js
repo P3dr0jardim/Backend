@@ -68,7 +68,7 @@ var io = require('socket.io')(server);
 app.get('/', function (req, res) {
     res.render('index.ejs');
 });
-app.post('/', (req, res) => {
+app.post('/upload', (req, res) => {
     upload(req, res, (err) => {
         if (err) {
             res.render('index.ejs', {
@@ -76,7 +76,7 @@ app.post('/', (req, res) => {
             });
         } else {
             if (req.file == undefined) {
-                res.json({
+                res.render({
                     msg: 'Error: No File Selected!'
                 });
             } else {
@@ -84,7 +84,7 @@ app.post('/', (req, res) => {
          //           message: "<img src='./public/uploads/+" + req.file.filename + "'>",
          //           username: socket.username
           //      });
-                res.json('index.ejs', {
+                res.render('index.ejs', {
                     msg: 'File Uploaded!',
                     file: `uploads/${req.file.filename}`
                 });
