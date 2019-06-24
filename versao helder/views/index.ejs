@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" const="text/html;charset=UTF-8" />
+    <link href="http://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title> Chat App</title>
+  </head>
+  
+  <body>
+     
+
+    <header>
+      <h1> Chat</h1>
+    </header>
+ 
+<div class="container">
+    <section id="chatroom">
+      </div>
+  </div>
+      <section id="feedback"></section>
+    </section>
+    <div class="container">
+        <input class="form-control" type="text" placeholder="message"  id="message" />
+        <button type="button" id="send_message" class="btn btn-dark">Send</button>
+      <br>
+      <img src="<%= typeof file != 'undefined' ? file : '' %>" class="responsive-img">
+      <input class="form-control" type="text" placeholder="update name"  id="name" /> 
+      <button type="button" id="update_name" class="btn btn-dark">Update Name</button>
+  
+    </section>
+    <%= typeof msg != 'undefined' ? msg : '' %>
+    <form action="upload" method="POST" enctype="multipart/form-data">
+      <div class="file-field input-field">
+        <div class="btn GREY">
+          <span>File</span>
+          <input name="myImage" type="file">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
+      </div>
+      <button type="sumbmit" class="btn">Submit</button>
+    </form>
+  </div>
+    <div class="container">
+    
+          <h2>List of Users</h2>
+          <ul id ='userlist'>
+       
+      </div>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="chat.js"></script>
+  </body>
+</html>
