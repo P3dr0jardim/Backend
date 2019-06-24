@@ -42,6 +42,13 @@ $(function () {
     socket.on('private_message',function(data){
         chatroom.append("<span class=privado><p>User " + data.username + " send you : " + data.message + "</p></span>")
     })
+    socket.on('message_true',function(data){
+        chatroom.append("<span class=sus><p>You send to " + data.username + ": " + data.message + "</p></span>")
+    })
+    socket.on('erro_user',function(data){
+        console.log("herre")
+        chatroom.append("<span class=erro><p>"+ data.message + "</p></span>")
+})
     socket.on("broadcast_userlist", (data) => {
         list.empty();
         for (i = 0; i < data.length; i++) {

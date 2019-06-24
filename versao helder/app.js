@@ -68,7 +68,7 @@ var io = require('socket.io')(server);
 app.get('/', function (req, res) {
     res.render('index.ejs');
 });
-app.post('/upload', (req, res) => {
+app.post('/', (req, res) => {
     upload(req, res, (err) => {
         if (err) {
             res.render('index.ejs', {
@@ -76,7 +76,7 @@ app.post('/upload', (req, res) => {
             });
         } else {
             if (req.file == undefined) {
-                res.render('index.ejs', {
+                res.json({
                     msg: 'Error: No File Selected!'
                 });
             } else {
@@ -84,7 +84,7 @@ app.post('/upload', (req, res) => {
          //           message: "<img src='./public/uploads/+" + req.file.filename + "'>",
          //           username: socket.username
           //      });
-                res.render('index.ejs', {
+                res.json('index.ejs', {
                     msg: 'File Uploaded!',
                     file: `uploads/${req.file.filename}`
                 });
@@ -114,12 +114,38 @@ io.on("connection", (socket) => {
     socket.username = "USER " + uuid();
     writelog("User " + socket.username + " Connected");
     socket.on("send_message", (data) => {
+        if(data.message[0]=="@"){
+            var separar=data.message.split(":")
+            var nome="";
+            for(var i=1;i<separar[0].length;i++){
+                nome+=separar[0][i]
+            }
+            destid=userlist.nome;
+            if(destid!=null){
+                writechat("User " + socket.username + "send to "+nome+":"+separado[1])
+                io.to(destid).emit('private_message', {
+                message: separado[1],
+                username: socket.username,
+                destusername: nome
+            })
+            io.to(socket.id).emit('message_true',{
+                message:separado[1],
+                username:nome
+            })
+        }else{
+            var myname=socket.name
+            io.to(myname).emit('erro_user',{
+                message:"User not exist"
+            })
+        }
+    }else{
         writechat(socket.username + ":" + data.message)
         io.sockets.emit('broadcast_message', {
             message: data.message,
             username: socket.username
-        });
-    });
+        })
+    }
+});
     socket.on("user_connected", (data) => {
         io.sockets.emit('broadcast_user', {
             username: socket.username
